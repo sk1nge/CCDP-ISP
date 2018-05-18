@@ -53,3 +53,7 @@ router isis 1
   !
  !
 !
+mpls ldp
+ interface GigabitEthernet0/0/0/5
+ !
+ interface GigabitEthernet0/0/0/6
