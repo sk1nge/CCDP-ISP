@@ -1,0 +1,45 @@
+hostname vest-bl-04
+logging console debugging
+interface Loopback0
+ ipv4 address 1.255.0.6/32
+ ipv6 address 2001:1:255::6/128
+ no shutdown
+!
+interface GigabitEthernet0/0/0/2
+ ipv4 address 1.0.0.22 255.255.255.252
+ ipv6 address 2001:1::22/127
+ ipv6 address fe80::6 link-local
+ no shutdown
+!
+interface GigabitEthernet0/0/0/3
+ ipv4 address 1.0.0.10 255.255.255.252
+ ipv6 address 2001:1::10/127
+ ipv6 address fe80::6 link-local
+ no shutdown
+!
+router isis 1
+ net 49.0000.0000.0000.0006.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ address-family ipv6 unicast
+  metric-style wide
+ !
+ interface Loopback0
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  ! 
+ !
+ interface GigabitEthernet0/0/0/2
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ interface GigabitEthernet0/0/0/3
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+!
