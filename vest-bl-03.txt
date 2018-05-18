@@ -5,6 +5,10 @@ interface Loopback0
  ipv6 address 2001:1:255::5/128
  no shutdown
 !
+interface MgmtEth0/0/CPU0/0
+ ipv4 address dhcp
+ no shutdown
+!
 interface GigabitEthernet0/0/0/2
  ipv4 address 1.0.0.6 255.255.255.252
  ipv6 address 2001:1::6/127
@@ -16,6 +20,10 @@ interface GigabitEthernet0/0/0/3
  ipv6 address 2001:1::26/127
  ipv6 address fe80::5 link-local
  no shutdown
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.10.123.1
 !
 router isis 1
  net 49.0000.0000.0000.0005.00
