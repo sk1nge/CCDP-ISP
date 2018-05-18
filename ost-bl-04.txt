@@ -1,0 +1,72 @@
+hostname ost-bl-04
+logging console debugging
+interface Loopback0
+ ipv4 address 2.255.0.6/32
+ ipv6 address 2001:2:255::6/128
+ no shutdown
+!
+interface MgmtEth0/0/CPU0/0
+ ipv4 address dhcp
+ no shutdown
+!
+interface GigabitEthernet0/0/0/0
+ ipv4 address 2.0.0.42/30
+ ipv6 address 2001:2::42/127
+ ipv6 address fe80::6 link-local
+ no shutdown
+!
+interface GigabitEthernet0/0/0/1
+ shutdown
+!
+interface GigabitEthernet0/0/0/2
+ ipv4 address 2.0.0.22/30
+ ipv6 address 2001:2::22/127
+ ipv6 address fe80::6 link-local
+ no shutdown
+!
+interface GigabitEthernet0/0/0/3
+ ipv4 address 2.0.0.10/30
+ ipv6 address 2001:2::10/127
+ ipv6 address fe80::6 link-local
+ no shutdown
+!
+interface GigabitEthernet0/0/0/4
+ shutdown
+!
+interface GigabitEthernet0/0/0/5
+shutdown
+!
+interface GigabitEthernet0/0/0/6
+shutdown
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.10.123.1
+ !
+!
+router isis 1
+ net 49.0000.0000.0000.0006.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ address-family ipv6 unicast
+  metric-style wide
+ !
+ interface Loopback0
+  passive
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ interface GigabitEthernet0/0/0/2
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ interface GigabitEthernet0/0/0/3
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+!
+end
