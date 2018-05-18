@@ -1,4 +1,5 @@
 hostname vest-bb-01
+ssh server v2
 logging console debugging
 interface Loopback0
  ipv4 address 1.255.0.1/32
@@ -6,7 +7,8 @@ interface Loopback0
  no shutdown
 !
 interface MgmtEth0/0/CPU0/0
- ipv4 address dhcp
+ no ipv4 address dhcp
+ ipv4 add 10.10.123.225 255.255.255.0
  no shutdown
 !
 interface GigabitEthernet0/0/0/0
