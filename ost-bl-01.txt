@@ -6,14 +6,9 @@ interface Loopback0
  no shutdown
 !
 interface MgmtEth0/0/CPU0/0
- ipv4 address dhcp
+ ipv4 address 10.10.123.233/24
  no shutdown
 !
-!interface GigabitEthernet0/0/0/0
-! ipv4 address 2.0.0.37/30
-! ipv6 address 2001:2::30/127
-! ipv6 address fe80::3 link-local
-! no shutdown
 interface GigabitEthernet0/0/0/0
  shutdown
 !
@@ -70,5 +65,11 @@ router isis 1
   !
   address-family ipv6 unicast
   !
+ mpls ldp
+  interface GigabitEthernet0/0/0/2
+  !
+  interface GigabitEthernet0/0/0/3
+  !
+ ssh server v2
 !
 end
