@@ -1,5 +1,7 @@
-hostname vest-bb-02
-ssh server v2
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Tue May 22 11:35:30 2018 by cisco
+!
+hostname vest-p-02
 logging console debugging
 interface Loopback0
  ipv4 address 1.255.0.2/32
@@ -130,3 +132,6 @@ mpls ldp
  interface GigabitEthernet0/0/0/5
  !
  interface GigabitEthernet0/0/0/6
+ !
+!
+ssh server v2

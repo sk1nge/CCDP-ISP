@@ -1,7 +1,7 @@
 !! IOS XR Configuration 6.0.1
 !! Last configuration change at Tue May 22 11:27:14 2018 by cisco
 !
-hostname vest-bb-01
+hostname vest-p-01
 logging console debugging
 interface Loopback0
  ipv4 address 1.255.0.1 255.255.255.255
