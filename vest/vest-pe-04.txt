@@ -1,19 +1,31 @@
-hostname vest-bl-04
-ssh server v2
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Tue May 22 11:34:39 2018 by cisco
+!
+hostname vest-pe-04
 logging console debugging
 !
 vrf CUST_A
  address-family ipv4 unicast
   import route-target
-   1337:1
+   1:1
   !
   export route-target
-   1337:1
+   1:1
   !
  !
 !
 route-policy PASS
   pass
+end-policy
+!
+prefix-set CUST_A_PFX_OUT
+ 192.168.2.0/24, 1.254.0.0/30
+end-set
+!
+route-policy CUST_A_RP_OUT
+ if destination in CUST_A_PFX_OUT then
+  pass
+ endif
 end-policy
 !
 interface Loopback0
@@ -92,14 +104,27 @@ router bgp 1
   update-source Loopback0
   address-family ipv4 unicast
   !
+ neighbor 1.255.0.3
+  remote-as 1
+  update-source Loopback0
+  address-family vpnv4 unicast
+   route-policy PASS in
+   route-policy PASS out
+   next-hop-self
+  !
+ !
  vrf CUST_A
-  rd 1337:1
+  rd 1:1
   address-family ipv4 unicast
+   network 1.254.1.0/30
+   exit
+   !
   neighbor 1.254.1.2
    remote-as 1337
    address-family ipv4 unicast
     route-policy PASS in
-    route-policy PASS out
+    route-policy CUST_A_RP_OUT out
+    as-override
    !
   !
  !
@@ -108,3 +133,6 @@ mpls ldp
  interface GigabitEthernet0/0/0/2
  !
  interface GigabitEthernet0/0/0/3
+ !
+!
+ssh server v2
