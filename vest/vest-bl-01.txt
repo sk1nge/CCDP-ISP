@@ -4,12 +4,31 @@ Building configuration...
 !
 hostname vest-bl-01
 logging console debugging
+vrf CUST_A
+ address-family ipv4 unicast
+  import route-target
+   1337:1
+  !
+  export route-target
+   1337:1
+  !
+ !
+!
+route-policy PASS
+  pass
+end-policy
+!
 interface Loopback0
  ipv4 address 1.255.0.3 255.255.255.255
  ipv6 address 2001:1:255::3/128
 !
 interface MgmtEth0/0/CPU0/0
  ipv4 address 10.10.123.227 255.255.255.0
+!
+interface GigabitEthernet0/0/0/4
+ vrf CUST_A
+ ipv4 address 1.254.0.1 255.255.255.252
+ no shutdown
 !
 interface GigabitEthernet0/0/0/5
  ipv4 address 1.0.0.30 255.255.255.252
@@ -54,6 +73,8 @@ router isis 1
  !
 !
 router bgp 1
+ address-family vpnv4 unicast
+ !
  address-family ipv4 unicast
  !
  neighbor 1.255.0.1
@@ -66,6 +87,17 @@ router bgp 1
   remote-as 1
   update-source Loopback0
   address-family ipv4 unicast
+  !
+ !
+ vrf CUST_A
+  rd 1337:1
+  address-family ipv4 unicast
+  neighbor 1.254.0.2
+   remote-as 1337
+   address-family ipv4 unicast
+    route-policy PASS in
+    route-policy PASS out
+   !
   !
  !
 !
