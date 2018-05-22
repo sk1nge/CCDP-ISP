@@ -1,0 +1,20 @@
+# 1.254.1.0/30 cust-a-01 vest-bl-04
+configure terminal
+ hostname cust-a-01
+ no ip domain-lookup
+ interface fastethernet 0/0
+  ip address 1.254.1.2 255.255.255.252
+  no shutdown
+  exit
+ interface loopback 0
+  ip address 192.168.1.1 255.255.255.0
+  no shutdown
+  exit
+  router bgp 1337
+   bgp log-neighbor-changes
+   neighbor 1.254.1.1 remote-as 1
+   address-family ipv4
+    network 192.168.1.0
+    neighbor 1.254.1.1 activate
+    exit-address-family
+   exit
