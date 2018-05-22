@@ -65,6 +65,7 @@ interface Loopback0
 interface FastEthernet0/0
  ip address 1.254.1.6 255.255.255.252
  duplex half
+ no shutdown
 !
 interface Ethernet1/0
  no ip address

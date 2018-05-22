@@ -14,6 +14,16 @@ vrf CUST_A
   !
  !
 !
+vrf CUST_B
+ address-family ipv4 unicast
+  import route-target
+   1:11
+  !
+  export route-target
+   1:11
+  !
+ !
+!
 route-policy PASS
   pass
 end-policy
@@ -22,8 +32,18 @@ prefix-set CUST_A_PFX_OUT
  192.168.2.0/24, 1.254.0.0/30
 end-set
 !
+prefix-set CUST_B_PFX_OUT
+ 192.168.2.0/24, 1.254.0.4/30
+end-set
+!
 route-policy CUST_A_RP_OUT
  if destination in CUST_A_PFX_OUT then
+  pass
+ endif
+end-policy
+!
+route-policy CUST_B_RP_OUT
+ if destination in CUST_B_PFX_OUT then
   pass
  endif
 end-policy
@@ -55,8 +75,9 @@ interface GigabitEthernet0/0/0/4
  ipv4 address 1.254.1.1 255.255.255.252
  no shutdown
 !
-interface GigabitEthernet0/0/0/4
- ipv4 address 1.254.1.1 255.255.255.252
+interface GigabitEthernet0/0/0/5
+ vrf CUST_B
+ ipv4 address 1.254.1.5 255.255.255.252
  no shutdown
 !
 router static
@@ -124,6 +145,21 @@ router bgp 1
    address-family ipv4 unicast
     route-policy PASS in
     route-policy CUST_A_RP_OUT out
+    as-override
+   !
+  !
+ !
+ vrf CUST_B
+  rd 1:11
+  address-family ipv4 unicast
+   network 1.254.1.4/30
+   exit
+   !
+  neighbor 1.254.1.6
+   remote-as 1338
+   address-family ipv4 unicast
+    route-policy PASS in
+    route-policy CUST_B_RP_OUT out
     as-override
    !
   !
