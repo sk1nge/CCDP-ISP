@@ -89,6 +89,12 @@ router bgp 1
   address-family ipv4 unicast
   !
  !
+ neighbor 1.255.0.6
+  remote-as 1
+  update-source Loopback0
+  address-family vpnv4 unicast
+  !
+ !
  vrf CUST_A
   rd 1337:1
   address-family ipv4 unicast
