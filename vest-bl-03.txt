@@ -66,21 +66,6 @@ router bgp 1
   update-source Loopback0
   address-family ipv4 unicast
   !
- neighbor 1.255.0.3
-  remote-as 1
-  update-source Loopback0
-  address-family ipv4 unicast
-  !
- neighbor 1.255.0.4
-  remote-as 1
-  update-source Loopback0
-  address-family ipv4 unicast
-  !
- neighbor 1.255.0.6
-  remote-as 1
-  update-source Loopback0
-  address-family ipv4 unicast
-  !
  !
 !
 mpls ldp
