@@ -13,6 +13,15 @@ interface MgmtEth0/0/CPU0/0
  ipv4 add 10.10.123.229 255.255.255.0
  no shutdown
 !
+interface GigabitEthernet0/0/0/0
+ no shutdown
+ exit
+!
+interface GigabitEthernet0/0/0/0.30 l2transport
+ encapsulation dot1q 30
+ no shutdown
+ exit
+!
 interface GigabitEthernet0/0/0/2
  ipv4 address 1.0.0.6 255.255.255.252
  ipv6 address 2001:1::6/127
@@ -74,6 +83,14 @@ mpls ldp
  interface GigabitEthernet0/0/0/2
  !
  interface GigabitEthernet0/0/0/3
+ !
+!
+l2vpn
+ xconnect group CUST_C
+  p2p CUST_C_01_CUST_C_02
+   interface GigabitEthernet0/0/0/0.30
+   neighbor 1.255.0.4 pw-id 1338
+  !
  !
 !
 ssh server v2
