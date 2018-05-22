@@ -97,6 +97,7 @@ router bgp 1
    address-family ipv4 unicast
     route-policy PASS in
     route-policy PASS out
+    as-override
    !
   !
  !
