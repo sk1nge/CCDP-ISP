@@ -3,6 +3,11 @@
 !
 hostname vest-pe-03
 logging console debugging
+!
+route-policy PASS
+  pass
+end-policy
+!
 interface Loopback0
  ipv4 address 1.255.0.5/32
  ipv6 address 2001:1:255::5/128
@@ -11,6 +16,12 @@ interface Loopback0
 interface MgmtEth0/0/CPU0/0
  no ipv4 address dhcp
  ipv4 add 10.10.123.229 255.255.255.0
+ no shutdown
+!
+interface GigabitEthernet0/0/0/1
+ ipv4 address 209.0.0.1 255.255.255.252
+ ipv6 address fe80::1:5 link-local
+ ipv6 address 2001:209::1/127
  no shutdown
 !
 interface GigabitEthernet0/0/0/2
@@ -57,6 +68,18 @@ router isis 1
 !
 router bgp 1
  address-family ipv4 unicast
+!
+address-family vpnv4 unicast
+ retain route-target all
+ !
+!
+neighbor 209.0.0.2
+  remote-as 2
+  address-family vpnv4 unicast
+   route-policy PASS in
+   route-policy PASS out
+   next-hop-self
+  !
  !
  neighbor 1.255.0.1
   remote-as 1
