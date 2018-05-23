@@ -1,12 +1,12 @@
-hostname ost-bl-01
+hostname ost-pe-02
 logging console debugging
 interface Loopback0
- ipv4 address 2.255.0.3/32
- ipv6 address 2001:2:255::3/128
+ ipv4 address 2.255.0.4/32
+ ipv6 address 2001:2:255::4/128
  no shutdown
 !
 interface MgmtEth0/0/CPU0/0
- ipv4 address 10.10.123.233/24
+ ipv4 address 10.10.123.234/24
  no shutdown
 !
 interface GigabitEthernet0/0/0/0
@@ -25,15 +25,15 @@ interface GigabitEthernet0/0/0/4
  shutdown
 !
 interface GigabitEthernet0/0/0/5
- ipv4 address 2.0.0.30/30
- ipv6 address 2001:2::30/127
- ipv6 address fe80::3 link-local
+ ipv4 address 2.0.0.14/30
+ ipv6 address 2001:2::14/127
+ ipv6 address fe80::4 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/6
- ipv4 address 2.0.0.18/30
- ipv6 address 2001:2::18/127
- ipv6 address fe80::3 link-local
+ ipv4 address 2.0.0.34/30
+ ipv6 address 2001:2::34/127
+ ipv6 address fe80::4 link-local
  no shutdown
  !
  router static
@@ -42,7 +42,7 @@ interface GigabitEthernet0/0/0/6
   !
  !
 router isis 1
- net 49.0000.0000.0000.0003.00
+ net 49.0000.0000.0000.0004.00
  address-family ipv4 unicast
   metric-style wide
  !

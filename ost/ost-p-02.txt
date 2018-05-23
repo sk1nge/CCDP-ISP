@@ -1,32 +1,32 @@
-hostname ost-bb-01
+hostname ost-p-02
 logging console debugging
 interface Loopback0
- ipv4 address 2.255.0.1/32
- ipv6 address 2001:2:255::1/128
+ ipv4 address 2.255.0.2/32
+ ipv6 address 2001:2:255::2/128
  no shutdown
 !
 interface MgmtEth0/0/CPU0/0
- ipv4 address 10.10.123.231/24
+ ipv4 address 10.10.123.232/24
  no shutdown
 !
 interface GigabitEthernet0/0/0/0
- ipv4 address 2.0.0.1/30
- ipv6 address 2001:2::1/127
- ipv6 address fe80::1 link-local
+ ipv4 address 2.0.0.2/30
+ ipv6 address 2001:2::2/127
+ ipv6 address fe80::2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/1
  shutdown
 !
 interface GigabitEthernet0/0/0/2
- ipv4 address 2.0.0.5/30
- ipv6 address 2001:2::5/127
- ipv6 address fe80::1 link-local
+ ipv4 address 2.0.0.21/30
+ ipv6 address 2001:2::21/127
+ ipv6 address fe80::2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/3
- ipv4 address 2.0.0.9/30
- ipv6 address 2001:2::9/127
+ ipv4 address 2.0.0.25/30
+ ipv6 address 2001:2::25/127
  ipv6 address fe80::1 link-local
  no shutdown
 !
@@ -34,15 +34,15 @@ interface GigabitEthernet0/0/0/4
  shutdown
 !
 interface GigabitEthernet0/0/0/5
- ipv4 address 2.0.0.13/30
- ipv6 address 2001:2::13/127
- ipv6 address fe80::1 link-local
+ ipv4 address 2.0.0.29/30
+ ipv6 address 2001:2::29/127
+ ipv6 address fe80::2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/6
- ipv4 address 2.0.0.17/30
- ipv6 address 2001:2::17/127
- ipv6 address fe80::1 link-local
+ ipv4 address 2.0.0.33/30
+ ipv6 address 2001:2::33/127
+ ipv6 address fe80::2 link-local
  no shutdown
 !
 router static
@@ -51,7 +51,7 @@ router static
  !
 !
 router isis 1
- net 49.0000.0000.0000.0001.00
+ net 49.0000.0000.0000.0002.00
  address-family ipv4 unicast
   metric-style wide
  !

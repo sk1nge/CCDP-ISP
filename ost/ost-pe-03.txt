@@ -1,4 +1,4 @@
-hostname ost-bl-03
+hostname ost-pe-03
 logging console debugging
 interface Loopback0
  ipv4 address 2.255.0.5/32
