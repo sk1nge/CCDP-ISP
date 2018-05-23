@@ -4,6 +4,16 @@
 hostname vest-pe-03
 logging console debugging
 !
+vrf CUST_D
+ address-family ipv4 unicast
+  import route-target
+   1340:1
+  !
+  export route-target
+   1340:1
+  !
+ !
+!
 route-policy PASS
   pass
 end-policy
@@ -17,6 +27,15 @@ interface MgmtEth0/0/CPU0/0
  no ipv4 address dhcp
  ipv4 add 10.10.123.229 255.255.255.0
  no shutdown
+!
+interface GigabitEthernet0/0/0/0
+ no shutdown
+!
+interface GigabitEthernet0/0/0/0.40
+ vrf CUST_D
+ ipv4 address 1.254.3.1 255.255.255.252
+ no shutdown
+ encapsulation dot1q 40
 !
 interface GigabitEthernet0/0/0/1
  ipv4 address 209.0.0.1 255.255.255.252
@@ -90,6 +109,21 @@ neighbor 209.0.0.2
   remote-as 1
   update-source Loopback0
   address-family ipv4 unicast
+  !
+ !
+ vrf CUST_D
+  rd 1340:1
+  address-family ipv4 unicast
+   network 1.254.3.0/30
+   exit
+   !
+  neighbor 1.254.3.2
+   remote-as 1340
+   address-family ipv4 unicast
+    route-policy PASS in
+    route-policy PASS out
+    as-override
+   !
   !
  !
 !
