@@ -26,54 +26,54 @@
     0.0.0.0/0 10.10.123.1
    !
   !
- router isis 1
-  net 49.0000.0000.0000.0007.00
-  mpls ldp autoconfig
-  address-family ipv4 unicast
-   metric-style wide
-  !
-  address-family ipv6 unicast
-   metric-style wide
-  !
-  interface Loopback0
-   passive
-   address-family ipv4 unicast
-   !
-   address-family ipv6 unicast
-   !
-  interface GigabitEthernet0/0/0/0
-   address-family ipv4 unicast
-   !
-   address-family ipv6 unicast
-   !
-  interface GigabitEthernet0/0/0/1
-   address-family ipv4 unicast
-   !
-   address-family ipv6 unicast
-   !
-  !
-  router bgp 2
-   address-family vpnv4 unicast
-   neighbor 2.255.0.3
-    remote-as 2
-    update-source lo0
-    address-family vpnv4 unicast
-     route-reflector-client
-   neighbor 2.255.0.4
-    remote-as 2
-    update-source lo0
-    address-family vpnv4 unicast
-     route-reflector-client
-   neighbor 2.255.0.5
-    remote-as 2
-    update-source lo0
-    address-family vpnv4 unicast
-     route-reflector-client
-   neighbor 2.255.0.6
-    remote-as 2
-    update-source lo0
-    address-family vpnv4 unicast
-     route-reflector-client
+router isis 1
+net 49.0000.0000.0000.0007.00
+mpls ldp autoconfig
+address-family ipv4 unicast
+ metric-style wide
+!
+address-family ipv6 unicast
+ metric-style wide
+!
+interface Loopback0
+ passive
+ address-family ipv4 unicast
+ !
+ address-family ipv6 unicast
+ !
+interface GigabitEthernet0/0/0/0
+ address-family ipv4 unicast
+ !
+ address-family ipv6 unicast
+ !
+interface GigabitEthernet0/0/0/1
+ address-family ipv4 unicast
+ !
+ address-family ipv6 unicast
+ !
+!
+router bgp 2
+ address-family vpnv4 unicast
+ neighbor 2.255.0.3
+  remote-as 2
+  update-source lo0
+  address-family vpnv4 unicast
+   route-reflector-client
+ neighbor 2.255.0.4
+  remote-as 2
+  update-source lo0
+  address-family vpnv4 unicast
+   route-reflector-client
+ neighbor 2.255.0.5
+  remote-as 2
+  update-source lo0
+  address-family vpnv4 unicast
+   route-reflector-client
+ neighbor 2.255.0.6
+  remote-as 2
+  update-source lo0
+  address-family vpnv4 unicast
+   route-reflector-client
  !
  mpls ldp
    !
