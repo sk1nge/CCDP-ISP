@@ -89,6 +89,7 @@ interface GigabitEthernet0/0/0/5
 router static
  address-family ipv4 unicast
   0.0.0.0/0 10.10.123.1
+  209.0.0.6/32 GigabitEthernet0/0/0/1
 !
 router isis 1
  net 49.0000.0000.0000.0006.00
