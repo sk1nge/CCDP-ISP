@@ -1,49 +1,47 @@
+Wed May 23 09:16:53.887 UTC
+Building configuration...
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Wed May 23 09:16:46 2018 by cisco
+!
 hostname ost-p-02
 logging console debugging
 interface Loopback0
- ipv4 address 2.255.0.2/32
+ ipv4 address 2.255.0.2 255.255.255.255
  ipv6 address 2001:2:255::2/128
- no shutdown
 !
 interface MgmtEth0/0/CPU0/0
- ipv4 address 10.10.123.232/24
- no shutdown
+ ipv4 address 10.10.123.232 255.255.255.0
 !
 interface GigabitEthernet0/0/0/0
- ipv4 address 2.0.0.2/30
- ipv6 address 2001:2::2/127
+ ipv4 address 2.0.0.2 255.255.255.252
  ipv6 address fe80::2 link-local
- no shutdown
+ ipv6 address 2001:2::2/127
 !
 interface GigabitEthernet0/0/0/1
  shutdown
 !
 interface GigabitEthernet0/0/0/2
- ipv4 address 2.0.0.21/30
- ipv6 address 2001:2::21/127
+ ipv4 address 2.0.0.21 255.255.255.252
  ipv6 address fe80::2 link-local
- no shutdown
+ ipv6 address 2001:2::21/127
 !
 interface GigabitEthernet0/0/0/3
- ipv4 address 2.0.0.25/30
- ipv6 address 2001:2::25/127
+ ipv4 address 2.0.0.25 255.255.255.252
  ipv6 address fe80::1 link-local
- no shutdown
+ ipv6 address 2001:2::25/127
 !
 interface GigabitEthernet0/0/0/4
  shutdown
 !
 interface GigabitEthernet0/0/0/5
- ipv4 address 2.0.0.29/30
- ipv6 address 2001:2::29/127
+ ipv4 address 2.0.0.29 255.255.255.252
  ipv6 address fe80::2 link-local
- no shutdown
+ ipv6 address 2001:2::29/127
 !
 interface GigabitEthernet0/0/0/6
- ipv4 address 2.0.0.33/30
- ipv6 address 2001:2::33/127
+ ipv4 address 2.0.0.33 255.255.255.252
  ipv6 address fe80::2 link-local
- no shutdown
+ ipv6 address 2001:2::33/127
 !
 router static
  address-family ipv4 unicast
@@ -64,42 +62,51 @@ router isis 1
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/0
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/2
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/3
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/5
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/6
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
- mpls ldp
-  interface GigabitEthernet0/0/0/0
-  !
-  interface GigabitEthernet0/0/0/2
-  !
-  interface GigabitEthernet0/0/0/3
-  !
-  interface GigabitEthernet0/0/0/5
-  !
-  interface GigabitEthernet0/0/0/6
-  !
- ssh server v2
+ !
 !
+mpls ldp
+ interface GigabitEthernet0/0/0/0
+ !
+ interface GigabitEthernet0/0/0/1
+ !
+ interface GigabitEthernet0/0/0/2
+ !
+ interface GigabitEthernet0/0/0/3
+ !
+ interface GigabitEthernet0/0/0/5
+ !
+ interface GigabitEthernet0/0/0/6
+ !
+!
+ssh server v2
 end

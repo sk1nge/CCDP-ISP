@@ -1,13 +1,14 @@
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Wed May 23 09:24:50 2018 by cisco
+!
 hostname ost-pe-03
 logging console debugging
 interface Loopback0
- ipv4 address 2.255.0.5/32
+ ipv4 address 2.255.0.5 255.255.255.255
  ipv6 address 2001:2:255::5/128
- no shutdown
 !
 interface MgmtEth0/0/CPU0/0
- ipv4 address 10.10.123.235/24
- no shutdown
+ ipv4 address 10.10.123.235 255.255.255.0
 !
 interface GigabitEthernet0/0/0/0
  shutdown
@@ -16,25 +17,23 @@ interface GigabitEthernet0/0/0/1
  shutdown
 !
 interface GigabitEthernet0/0/0/2
- ipv4 address 2.0.0.6/30
- ipv6 address 2001:2::6/127
+ ipv4 address 2.0.0.6 255.255.255.252
  ipv6 address fe80::5 link-local
- no shutdown
+ ipv6 address 2001:2::6/127
 !
 interface GigabitEthernet0/0/0/3
- ipv4 address 2.0.0.26/30
- ipv6 address 2001:2::26/127
+ ipv4 address 2.0.0.26 255.255.255.252
  ipv6 address fe80::5 link-local
- no shutdown
+ ipv6 address 2001:2::26/127
 !
 interface GigabitEthernet0/0/0/4
  shutdown
 !
 interface GigabitEthernet0/0/0/5
-shutdown
+ shutdown
 !
 interface GigabitEthernet0/0/0/6
-shutdown
+ shutdown
 !
 router static
  address-family ipv4 unicast
@@ -55,21 +54,39 @@ router isis 1
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/2
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/3
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
- mpls ldp
-  interface GigabitEthernet0/0/0/5
-  !
-  interface GigabitEthernet0/0/0/6
-  !
- ssh server v2
+ !
 !
+router bgp 2
+ address-family ipv4 unicast
+ !
+ address-family vpnv4 unicast
+ !
+ address-family ipv6 unicast
+ !
+ neighbor 2.255.0.7
+  remote-as 2
+  update-source Loopback0
+  address-family vpnv4 unicast
+  !
+ !
+!
+mpls ldp
+ interface GigabitEthernet0/0/0/5
+ !
+ interface GigabitEthernet0/0/0/6
+ !
+!
+ssh server v2
 end
