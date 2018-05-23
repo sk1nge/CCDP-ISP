@@ -87,31 +87,31 @@ router isis 1
  !
 !
 router bgp 1
- address-family ipv4 unicast
-!
-address-family vpnv4 unicast
- retain route-target all
- !
-!
-neighbor 209.0.0.2
-  remote-as 2
-  address-family vpnv4 unicast
-   route-policy PASS in
-   route-policy PASS out
-   next-hop-self
-  !
- !
- neighbor 1.255.0.1
-  remote-as 1
-  update-source Loopback0
   address-family ipv4 unicast
-  !
- neighbor 1.255.0.2
-  remote-as 1
-  update-source Loopback0
-  address-family ipv4 unicast
+ !
+ address-family vpnv4 unicast
+  retain route-target all
   !
  !
+ neighbor 209.0.0.2
+   remote-as 2
+   address-family vpnv4 unicast
+    route-policy PASS in
+    route-policy PASS out
+    next-hop-self
+   !
+  !
+  neighbor 1.255.0.1
+   remote-as 1
+   update-source Loopback0
+   address-family ipv4 unicast
+   !
+  neighbor 1.255.0.2
+   remote-as 1
+   update-source Loopback0
+   address-family ipv4 unicast
+   !
+  !
  vrf CUST_D
   rd 1340:1
   address-family ipv4 unicast
