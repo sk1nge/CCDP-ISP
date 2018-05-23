@@ -27,7 +27,7 @@
    !
   !
  router isis 1
-  net 49.0000.0000.0000.0003.00
+  net 49.0000.0000.0000.0007.00
   mpls ldp autoconfig
   address-family ipv4 unicast
    metric-style wide
