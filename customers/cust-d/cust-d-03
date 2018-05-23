@@ -13,7 +13,7 @@ router bgp 1340
  neighbor 172.16.0.9 remote-as 2
  !
  address-family ipv4
-  network 192.168.6.0
+  network 192.168.6.0 255.255.255.0
   neighbor 172.16.0.9 activate
  exit-address-family
 !
