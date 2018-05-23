@@ -4,6 +4,16 @@
 hostname ost-pe-03
 logging console debugging
 !
+vrf CUST_D
+ address-family ipv4 unicast
+  import route-target
+   1340:1
+  !
+  export route-target
+   1340:1
+  !
+ !
+!
 route-policy PASS
   pass
 end-policy
@@ -105,9 +115,9 @@ neighbor 209.0.0.1
  !
 !
 mpls ldp
- interface GigabitEthernet0/0/0/5
+ interface GigabitEthernet0/0/0/2
  !
- interface GigabitEthernet0/0/0/6
+ interface GigabitEthernet0/0/0/3
  !
 !
 ssh server v2

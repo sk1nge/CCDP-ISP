@@ -117,9 +117,9 @@ router bgp 2
   !
 !
 mpls ldp
- interface GigabitEthernet0/0/0/5
+ interface GigabitEthernet0/0/0/2
  !
- interface GigabitEthernet0/0/0/6
+ interface GigabitEthernet0/0/0/3
  !
 !
 ssh server v2
