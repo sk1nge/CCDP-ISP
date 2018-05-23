@@ -3,6 +3,20 @@
 !
 hostname ost-pe-04
 logging console debugging
+vrf CUST_D
+ address-family ipv4 unicast
+  import route-target
+   1340:1
+  !
+  export route-target
+   1340:1
+  !
+ !
+!
+route-policy PASS
+  pass
+end-policy
+!
 interface Loopback0
  ipv4 address 2.255.0.6 255.255.255.255
  ipv6 address 2001:2:255::6/128
@@ -13,7 +27,10 @@ interface MgmtEth0/0/CPU0/0
   no shutdown
 !
 interface GigabitEthernet0/0/0/0
- shutdown
+ description "CUST_D_eBGP_PEERING"
+ vrf CUST_D
+ ipv4 address 172.16.0.9 255.255.255.252
+ no shutdown
 !
 interface GigabitEthernet0/0/0/1
  shutdown
@@ -85,6 +102,19 @@ router bgp 2
   address-family vpnv4 unicast
   !
  !
+ vrf CUST_D
+  rd 1340:1
+  address-family ipv4 unicast
+   redistribute connected
+   exit
+   !
+  neighbor 172.16.0.10
+   remote-as 1340
+   address-family ipv4 unicast
+    route-policy PASS in
+    as-override
+   !
+  !
 !
 mpls ldp
  interface GigabitEthernet0/0/0/5
