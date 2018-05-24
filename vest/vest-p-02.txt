@@ -19,6 +19,12 @@ interface GigabitEthernet0/0/0/0
  ipv6 address fe80::2 link-local
  no shutdown
 !
+interface GigabitEthernet0/0/0/1
+ ipv4 address 1.0.0.53 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::53/127
+ no shutdown
+!
 interface GigabitEthernet0/0/0/2
  ipv4 address 1.0.0.21 255.255.255.252
  ipv6 address 2001:1::21/127
@@ -29,6 +35,12 @@ interface GigabitEthernet0/0/0/3
  ipv4 address 1.0.0.25 255.255.255.252
  ipv6 address 2001:1::25/127
  ipv6 address fe80::2 link-local
+ no shutdown
+!
+interface GigabitEthernet0/0/0/4
+ ipv4 address 1.0.0.57 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::53/127
  no shutdown
 !
 interface GigabitEthernet0/0/0/5
@@ -66,21 +78,37 @@ router isis 1
   !
   address-family ipv6 unicast
   !
+ !
+ interface GigabitEthernet0/0/0/1
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
  interface GigabitEthernet0/0/0/2
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/3
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
+ interface GigabitEthernet0/0/0/4
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
  interface GigabitEthernet0/0/0/5
   address-family ipv4 unicast
   !
   address-family ipv6 unicast
   !
+ !
  interface GigabitEthernet0/0/0/6
   address-family ipv4 unicast
   !
@@ -125,9 +153,13 @@ router bgp 1
 mpls ldp
  interface GigabitEthernet0/0/0/0
  !
+ interface GigabitEthernet0/0/0/1
+ !
  interface GigabitEthernet0/0/0/2
  !
  interface GigabitEthernet0/0/0/3
+ !
+ interface GigabitEthernet0/0/0/4
  !
  interface GigabitEthernet0/0/0/5
  !
