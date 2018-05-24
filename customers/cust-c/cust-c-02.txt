@@ -202,6 +202,9 @@ mgcp profile default
 gatekeeper
  shutdown
 !
+router ospf 1
+ network 0.0.0.0 255.255.255.255 area 0
+ !
 !
 line con 0
  exec-timeout 0 0
