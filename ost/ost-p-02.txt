@@ -121,4 +121,8 @@ mpls ldp
  !
 !
 ssh server v2
+line default
+ exec-timeout 0
+ !
+!
 end

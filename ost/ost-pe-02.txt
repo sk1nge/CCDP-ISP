@@ -122,4 +122,8 @@ mpls ldp
  interface GigabitEthernet0/0/0/6
 !
 ssh server v2
+line default
+ exec-timeout 0
+ !
+!
 end
