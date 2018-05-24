@@ -8,17 +8,17 @@ ip vrf MGMT
 interface loopback 0
  no shutdown
  ip address 1.255.0.7 255.255.255.255
- router isis 1
+ ip router isis 1
  exit
 interface gigabitethernet 1
  no shutdown
  ip address 1.0.0.46 255.255.255.252
- router isis 1
+ ip router isis 1
  exit
 interface gigabitethernet 2
  no shutdown
  ip address 1.0.0.54 255.255.255.252
- router isis 1
+ ip router isis 1
  exit
 interface gigabitethernet 8
  ip vrf forwarding MGMT
@@ -45,5 +45,6 @@ router isis 1
  passive-interface loopback 0
  net 49.0000.0000.0000.0007.00
  metric-style wide
+ mpls ldp autoconfig
  exit
 !
