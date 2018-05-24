@@ -1,0 +1,27 @@
+hostname vest-pe-06
+ip domain-name CCDP-ISP
+no ip domain-lookup
+!
+ip vrf MGMT
+ exit
+!
+interface gigabitethernet 8
+ ip vrf forwarding MGMT
+ description MGMT interface
+ ip address 10.10.123.239 255.255.255.0
+ no shutdown
+ exit
+!
+ip route vrf MGMT 0.0.0.0 0.0.0.0 10.10.123.1
+!
+# crypto key generate rsa modulus 768
+ip ssh version 2
+!
+line vty 0
+ transport input ssh telnet
+ login local
+ no exec-timeout
+ logging synchronous
+ exit
+!
+username cisco privilege password cisco
