@@ -95,6 +95,7 @@ router bgp 1
  !
  neighbor 209.0.0.2
    remote-as 2
+   timers 5 15
    address-family vpnv4 unicast
     route-policy PASS in
     route-policy PASS out
