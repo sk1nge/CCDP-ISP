@@ -106,7 +106,7 @@ router bgp 2
  address-family ipv4 unicast
  address-family vpnv4 unicast
   retain route-target all
- address-family vpnv4 unicast
+ address-family vpnv6 unicast
   retain route-target all
   !
  !
