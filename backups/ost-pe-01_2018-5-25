@@ -1,0 +1,128 @@
+
+Fri May 25 07:32:22.623 UTC
+Building configuration...
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Thu May 24 07:36:38 2018 by cisco
+!
+hostname ost-pe-01
+logging console debugging
+vrf CUST_D
+ address-family ipv4 unicast
+  import route-target
+   1340:1
+  !
+  export route-target
+   1340:1
+  !
+ !
+!
+line default
+ exec-timeout 0 0
+!
+interface Loopback0
+ ipv4 address 2.255.0.3 255.255.255.255
+ ipv6 address 2001:2:255::3/128
+!
+interface MgmtEth0/0/CPU0/0
+ ipv4 address 10.10.123.233 255.255.255.0
+!
+interface GigabitEthernet0/0/0/0
+ description "CUST_D_eBGP_PEERING"
+ vrf CUST_D
+ ipv4 address 172.16.0.5 255.255.255.252
+!
+interface GigabitEthernet0/0/0/1
+ shutdown
+!
+interface GigabitEthernet0/0/0/2
+ shutdown
+!
+interface GigabitEthernet0/0/0/3
+ shutdown
+!
+interface GigabitEthernet0/0/0/4
+ shutdown
+!
+interface GigabitEthernet0/0/0/5
+ ipv4 address 2.0.0.30 255.255.255.252
+ ipv6 address fe80::3 link-local
+ ipv6 address 2001:2::30/127
+!
+interface GigabitEthernet0/0/0/6
+ ipv4 address 2.0.0.18 255.255.255.252
+ ipv6 address fe80::3 link-local
+ ipv6 address 2001:2::18/127
+!
+route-policy PASS
+  pass
+end-policy
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.10.123.1
+ !
+!
+router isis 1
+ net 49.0000.0000.0000.0003.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ address-family ipv6 unicast
+  metric-style wide
+ !
+ interface Loopback0
+  passive
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/5
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/6
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+!
+router bgp 2
+ address-family ipv4 unicast
+ !
+ address-family vpnv4 unicast
+ !
+ address-family ipv6 unicast
+ !
+ neighbor 2.255.0.7
+  remote-as 2
+  update-source Loopback0
+  address-family vpnv4 unicast
+  !
+ !
+ vrf CUST_D
+  rd 1340:1
+  address-family ipv4 unicast
+   redistribute connected
+  !
+  neighbor 172.16.0.6
+   remote-as 1340
+   address-family ipv4 unicast
+    route-policy PASS in
+    route-policy PASS out
+    as-override
+   !
+  !
+ !
+!
+mpls ldp
+ interface GigabitEthernet0/0/0/5
+ !
+ interface GigabitEthernet0/0/0/6
+ !
+!
+ssh server v2
+end

@@ -1,0 +1,150 @@
+
+Fri May 25 07:28:08.395 UTC
+Building configuration...
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Thu May 24 09:45:48 2018 by cisco
+!
+hostname vest-pe-03
+logging console debugging
+vrf CUST_D
+ address-family ipv4 unicast
+  import route-target
+   1340:1
+  !
+  export route-target
+   1340:1
+  !
+ !
+!
+line default
+ exec-timeout 0 0
+!
+interface Loopback0
+ ipv4 address 1.255.0.5 255.255.255.255
+ ipv6 address 2001:1:255::5/128
+!
+interface MgmtEth0/0/CPU0/0
+ ipv4 address 10.10.123.229 255.255.255.0
+!
+interface GigabitEthernet0/0/0/0.40
+ vrf CUST_D
+ ipv4 address 1.254.3.1 255.255.255.252
+ encapsulation dot1q 40
+!
+interface GigabitEthernet0/0/0/1
+ ipv4 address 209.0.0.1 255.255.255.252
+ ipv6 address fe80::1:5 link-local
+ ipv6 address 2001:209::1/127
+!
+interface GigabitEthernet0/0/0/2
+ ipv4 address 1.0.0.6 255.255.255.252
+ ipv6 address fe80::5 link-local
+ ipv6 address 2001:1::6/127
+!
+interface GigabitEthernet0/0/0/3
+ ipv4 address 1.0.0.26 255.255.255.252
+ ipv6 address fe80::5 link-local
+ ipv6 address 2001:1::26/127
+!
+interface GigabitEthernet0/0/0/4
+ shutdown
+!
+interface GigabitEthernet0/0/0/5
+ shutdown
+!
+interface GigabitEthernet0/0/0/6
+ shutdown
+!
+route-policy PASS
+  pass
+end-policy
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.10.123.1
+  209.0.0.2/32 GigabitEthernet0/0/0/1
+ !
+!
+router isis 1
+ net 49.0000.0000.0000.0005.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ address-family ipv6 unicast
+  metric-style wide
+ !
+ interface Loopback0
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/2
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/3
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+!
+router bgp 1
+ address-family ipv4 unicast
+ !
+ address-family vpnv4 unicast
+  retain route-target all
+ !
+ neighbor 1.255.0.1
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+  !
+ !
+ neighbor 1.255.0.2
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+  !
+ !
+ neighbor 1.255.0.6
+  remote-as 1
+  update-source Loopback0
+  address-family vpnv4 unicast
+  !
+ !
+ neighbor 209.0.0.2
+  remote-as 2
+  timers 5 15
+  address-family vpnv4 unicast
+   route-policy PASS in
+   route-policy PASS out
+   next-hop-self
+  !
+ !
+ vrf CUST_D
+  rd 1340:1
+  address-family ipv4 unicast
+   network 1.254.3.0/30
+  !
+  neighbor 1.254.3.2
+   remote-as 1340
+   address-family ipv4 unicast
+    route-policy PASS in
+    route-policy PASS out
+    as-override
+   !
+  !
+ !
+!
+mpls ldp
+ interface GigabitEthernet0/0/0/2
+ !
+ interface GigabitEthernet0/0/0/3
+ !
+!
+ssh server v2
+end

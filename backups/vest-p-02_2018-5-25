@@ -1,0 +1,172 @@
+
+Fri May 25 07:26:15.863 UTC
+Building configuration...
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Thu May 24 15:09:01 2018 by cisco
+!
+hostname vest-bb-02
+logging console debugging
+line default
+ exec-timeout 0 0
+!
+interface Loopback0
+ ipv4 address 1.255.0.2 255.255.255.255
+ ipv6 address 2001:1:255::2/128
+!
+interface MgmtEth0/0/CPU0/0
+ ipv4 address 10.10.123.226 255.255.255.0
+!
+interface GigabitEthernet0/0/0/0
+ ipv4 address 1.0.0.2 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::2/127
+!
+interface GigabitEthernet0/0/0/1
+ ipv4 address 1.0.0.53 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::53/127
+!
+interface GigabitEthernet0/0/0/2
+ ipv4 address 1.0.0.21 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::21/127
+!
+interface GigabitEthernet0/0/0/3
+ ipv4 address 1.0.0.25 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::25/127
+!
+interface GigabitEthernet0/0/0/4
+ ipv4 address 1.0.0.57 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::53/127
+!
+interface GigabitEthernet0/0/0/5
+ ipv4 address 1.0.0.29 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::29/127
+!
+interface GigabitEthernet0/0/0/6
+ ipv4 address 1.0.0.33 255.255.255.252
+ ipv6 address fe80::2 link-local
+ ipv6 address 2001:1::33/127
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.10.123.1
+ !
+!
+router isis 1
+ net 49.0000.0000.0000.0002.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ address-family ipv6 unicast
+  metric-style wide
+ !
+ interface Loopback0
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/0
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ !  !
+ interface GigabitEthernet0/0/0/1
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/2
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/3
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/4
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/5
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/6
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+!
+router bgp 1
+ address-family ipv4 unicast
+ !
+ neighbor 1.255.0.1
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+  !
+ !
+ neighbor 1.255.0.3
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+   route-reflector-client
+  !
+ !
+ neighbor 1.255.0.4
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+   route-reflector-client
+  !
+ !
+ neighbor 1.255.0.5
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+   route-reflector-client
+  !
+ !
+ neighbor 1.255.0.6
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+   route-reflector-client
+  !
+ !
+!
+mpls ldp
+ interface GigabitEthernet0/0/0/0
+ !
+ interface GigabitEthernet0/0/0/1
+ !
+ interface GigabitEthernet0/0/0/2
+ !
+ interface GigabitEthernet0/0/0/3
+ !
+ interface GigabitEthernet0/0/0/4
+ !
+ interface GigabitEthernet0/0/0/5
+ !
+ interface GigabitEthernet0/0/0/6
+ !
+!
+ssh server v2
+end
