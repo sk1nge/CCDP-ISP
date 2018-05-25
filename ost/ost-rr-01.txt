@@ -54,9 +54,12 @@ router isis 1
  !
 router bgp 2
  address-family vpnv4 unicast
+ address-family vpnv6 unicast
  neighbor 2.255.0.3
   remote-as 2
   update-source lo0
+  address-family vpnv4 unicast
+   route-reflector-client
   address-family vpnv4 unicast
    route-reflector-client
  neighbor 2.255.0.4
@@ -64,14 +67,20 @@ router bgp 2
   update-source lo0
   address-family vpnv4 unicast
    route-reflector-client
+  address-family vpnv4 unicast
+   route-reflector-client
  neighbor 2.255.0.5
   remote-as 2
   update-source lo0
   address-family vpnv4 unicast
    route-reflector-client
+  address-family vpnv4 unicast
+   route-reflector-client
  neighbor 2.255.0.6
   remote-as 2
   update-source lo0
+  address-family vpnv4 unicast
+   route-reflector-client
   address-family vpnv4 unicast
    route-reflector-client
  !

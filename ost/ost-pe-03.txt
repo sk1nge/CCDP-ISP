@@ -12,6 +12,13 @@ vrf CUST_D
   export route-target
    1340:1
   !
+  address-family ipv6 unicast
+   import route-target
+    1340:1
+   !
+   export route-target
+    1340:1
+   !
  !
 !
 route-policy PASS
@@ -93,8 +100,9 @@ router isis 1
 !
 router bgp 2
  address-family ipv4 unicast
- !
  address-family vpnv4 unicast
+  retain route-target all
+ address-family vpnv6 unicast
   retain route-target all
   !
  !
@@ -105,6 +113,8 @@ router bgp 2
   update-source Loopback0
   address-family vpnv4 unicast
    next-hop-self
+  address-family vpnv6 unicast
+   next-hop-self
    !
   !
  !
@@ -112,6 +122,10 @@ neighbor 209.0.0.1
  remote-as 1
  timers 5 15
  address-family vpnv4 unicast
+  route-policy PASS in
+  route-policy PASS out
+  next-hop-self
+ address-family vpnv6 unicast
   route-policy PASS in
   route-policy PASS out
   next-hop-self

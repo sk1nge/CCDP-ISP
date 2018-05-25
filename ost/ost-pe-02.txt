@@ -12,6 +12,14 @@ vrf CUST_D
    1340:1
   !
  !
+ address-family ipv6 unicast
+  import route-target
+   1340:1
+  !
+  export route-target
+   1340:1
+  !
+ !
 !
 route-policy PASS
   pass
@@ -29,6 +37,8 @@ interface GigabitEthernet0/0/0/0
  description "CUST_D_eBGP_PEERING"
  vrf CUST_D
  ipv4 address 172.16.0.1 255.255.255.252
+ ipv6 address fe80::2:4 link-local
+ ipv6 address 2001:172:16::1/127
  no shutdown
 !
 interface GigabitEthernet0/0/0/1
@@ -99,6 +109,7 @@ router bgp 2
   remote-as 2
   update-source Loopback0
   address-family vpnv4 unicast
+  address-family vpnv6 unicast
   !
  !
  vrf CUST_D
@@ -107,9 +118,17 @@ router bgp 2
    redistribute connected
    exit
    !
+  address-family ipv6 unicast
+   redistribute connected
+   exit
+   !
   neighbor 172.16.0.2
    remote-as 1340
    address-family ipv4 unicast
+    route-policy PASS in
+    route-policy PASS out
+    as-override
+   address-family ipv6 unicast
     route-policy PASS in
     route-policy PASS out
     as-override
