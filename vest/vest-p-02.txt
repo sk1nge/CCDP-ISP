@@ -16,43 +16,43 @@ interface MgmtEth0/0/CPU0/0
 interface GigabitEthernet0/0/0/0
  ipv4 address 1.0.0.2 255.255.255.252
  ipv6 address 2001:1::2/127
- ipv6 address fe80::2 link-local
+ ipv6 address fe80::1:2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/1
  ipv4 address 1.0.0.53 255.255.255.252
- ipv6 address fe80::2 link-local
+ ipv6 address fe80::1:2 link-local
  ipv6 address 2001:1::53/127
  no shutdown
 !
 interface GigabitEthernet0/0/0/2
  ipv4 address 1.0.0.21 255.255.255.252
  ipv6 address 2001:1::21/127
- ipv6 address fe80::2 link-local
+ ipv6 address fe80::1:2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/3
  ipv4 address 1.0.0.25 255.255.255.252
  ipv6 address 2001:1::25/127
- ipv6 address fe80::2 link-local
+ ipv6 address fe80::1:2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/4
  ipv4 address 1.0.0.57 255.255.255.252
- ipv6 address fe80::2 link-local
  ipv6 address 2001:1::53/127
+ ipv6 address fe80::1:2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/5
  ipv4 address 1.0.0.29 255.255.255.252
  ipv6 address 2001:1::29/127
- ipv6 address fe80::2 link-local
+ ipv6 address fe80::1:2 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/6
  ipv4 address 1.0.0.33 255.255.255.252
  ipv6 address 2001:1::33/127
- ipv6 address fe80::2 link-local
+ ipv6 address fe80::1:2 link-local
  no shutdown
 !
 router static

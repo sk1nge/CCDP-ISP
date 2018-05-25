@@ -27,9 +27,6 @@ for device in devices["devices"]:
     success = False
     counter = 0
 
-    ##### REMEMBER OST-RR-01 are not connected to MGMT network! #####
-    ### Increase global_delay_factor to 3 or 4 ###
-
     while success != True and counter < 3:
         try:
             counter += 1

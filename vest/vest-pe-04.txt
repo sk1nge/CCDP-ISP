@@ -67,23 +67,27 @@ interface GigabitEthernet0/0/0/1
 interface GigabitEthernet0/0/0/2
  ipv4 address 1.0.0.22 255.255.255.252
  ipv6 address 2001:1::22/127
- ipv6 address fe80::6 link-local
+ ipv6 address fe80::1:6 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/3
  ipv4 address 1.0.0.10 255.255.255.252
  ipv6 address 2001:1::10/127
- ipv6 address fe80::6 link-local
+ ipv6 address fe80::1:6 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/4
  vrf CUST_A
  ipv4 address 1.254.1.1 255.255.255.252
+ ipv6 address 2001:1:254:1::1/127
+ ipv6 address fe80::1:6 link-local
  no shutdown
 !
 interface GigabitEthernet0/0/0/5
  vrf CUST_B
  ipv4 address 1.254.1.5 255.255.255.252
+ ipv6 address 2001:1:254:1::5/127
+ ipv6 address fe80::1:6 link-local
  no shutdown
 !
 router static
