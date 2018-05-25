@@ -33,7 +33,7 @@ for device in devices["devices"]:
     while success != True and counter < 3:
         try:
             counter += 1
-            net_con = ConnectHandler(**current_device, global_delay_factor=2)
+            net_con = ConnectHandler(**current_device, global_delay_factor=4)
             running_config = net_con.send_command("show running-config")
             success = True
             print(f"success: {hostname}!")
