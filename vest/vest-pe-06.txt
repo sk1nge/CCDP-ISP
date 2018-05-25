@@ -13,7 +13,7 @@ pseudowire-class L2TPV3
 interface loopback 0
  no shutdown
  ip address 1.255.0.8 255.255.255.255
- ipv6 address 2001:
+ ipv6 address 2001:1:255::8/128
  ip router isis 1
  exit
 interface gigabitethernet 1
