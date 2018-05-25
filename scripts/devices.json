@@ -1,0 +1,109 @@
+{
+  "devices": [
+  {
+    "hostname": "vest-p-01",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.225",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "vest-p-02",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.226",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "vest-pe-01",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.227",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "vest-pe-02",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.228",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "vest-pe-03",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.229",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "vest-pe-04",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.230",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "vest-pe-05",
+    "device_type": "cisco_xe",
+    "ip": "10.10.123.238",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "vest-pe-06",
+    "device_type": "cisco_xe",
+    "ip": "10.10.123.239",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "ost-rr-01",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.237",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "ost-p-01",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.231",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "ost-p-02",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.232",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "ost-pe-01",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.233",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "ost-pe-02",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.234",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "ost-pe-03",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.235",
+    "username": "cisco",
+    "password": "cisco"
+  },
+  {
+    "hostname": "ost-pe-04",
+    "device_type": "cisco_xr",
+    "ip": "10.10.123.236",
+    "username": "cisco",
+    "password": "cisco"
+  }
+]
+}

@@ -1,0 +1,206 @@
+
+Thu May 24 22:51:52.737 UTC
+Building configuration...
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Thu May 24 09:47:16 2018 by cisco
+!
+hostname vest-pe-04
+logging console debugging
+vrf CUST_A
+ address-family ipv4 unicast
+  import route-target
+   1:1
+  !
+  export route-target
+   1:1
+  !
+ !
+!
+vrf CUST_B
+ address-family ipv4 unicast
+  import route-target
+   1:11
+  !
+  export route-target
+   1:11
+  !
+ !
+!
+line default
+ exec-timeout 0 0
+!
+interface Loopback0
+ ipv4 address 1.255.0.6 255.255.255.255
+ ipv6 address 2001:1:255::6/128
+!
+interface MgmtEth0/0/CPU0/0
+ ipv4 address 10.10.123.230 255.255.255.0
+!
+interface GigabitEthernet0/0/0/0
+ shutdown
+!
+interface GigabitEthernet0/0/0/1
+ ipv4 address 209.0.0.5 255.255.255.252
+ ipv6 address fe80::1:6 link-local
+ ipv6 address 2001:209::5/127
+!
+interface GigabitEthernet0/0/0/2
+ ipv4 address 1.0.0.22 255.255.255.252
+ ipv6 address fe80::6 link-local
+ ipv6 address 2001:1::22/127
+!
+interface GigabitEthernet0/0/0/3
+ ipv4 address 1.0.0.10 255.255.255.252
+ ipv6 address fe80::6 link-local
+ ipv6 address 2001:1::10/127
+!
+interface GigabitEthernet0/0/0/4
+ vrf CUST_A
+ ipv4 address 1.254.1.1 255.255.255.252
+!
+interface GigabitEthernet0/0/0/5
+ vrf CUST_B
+ ipv4 address 1.254.1.5 255.255.255.252
+!
+interface GigabitEthernet0/0/0/6
+ shutdown
+!
+prefix-set CUST_A_PFX_OUT
+  192.168.2.0/24,
+  1.254.0.0/30
+end-set
+!
+prefix-set CUST_B_PFX_OUT
+  192.168.2.0/24,
+  1.254.0.4/30
+end-set
+!
+route-policy PASS
+  pass
+end-policy
+!
+route-policy CUST_A_RP_OUT
+  if destination in CUST_A_PFX_OUT then
+    pass
+  endif
+end-policy
+!
+route-policy CUST_B_RP_OUT
+  if destination in CUST_B_PFX_OUT then
+    pass
+  endif
+end-policy
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.10.123.1
+  209.0.0.6/32 GigabitEthernet0/0/0/1
+ !
+!
+router isis 1
+ net 49.0000.0000.0000.0006.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ address-family ipv6 unicast
+  metric-style wide
+ !
+ interface Loopback0
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/2
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+ interface GigabitEthernet0/0/0/3
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+!
+router bgp 1
+ address-family ipv4 unicast
+ !
+ address-family vpnv4 unicast
+  retain route-target all
+ !
+ neighbor 1.255.0.1
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+  !
+ !
+ neighbor 1.255.0.2
+  remote-as 1
+  update-source Loopback0
+  address-family ipv4 unicast
+  !
+ !
+ neighbor 1.255.0.3
+  remote-as 1
+  update-source Loopback0
+  address-family vpnv4 unicast
+   route-policy PASS in
+   route-policy PASS out
+   next-hop-self
+  !
+ !
+ neighbor 1.255.0.5
+  remote-as 1
+  update-source Loopback0
+  address-family vpnv4 unicast
+   next-hop-self
+  !
+ !
+ neighbor 209.0.0.6
+  remote-as 2
+  timers 5 15
+  address-family vpnv4 unicast
+   route-policy PASS in
+   route-policy PASS out
+   next-hop-self
+  !
+ !
+ vrf CUST_A
+  rd 1:1
+  address-family ipv4 unicast
+   network 1.254.1.0/30
+  !
+  neighbor 1.254.1.2
+   remote-as 1337
+   address-family ipv4 unicast
+    route-policy PASS in
+    route-policy CUST_A_RP_OUT out
+    as-override
+   !
+  !
+ !
+ vrf CUST_B
+  rd 1:11
+  address-family ipv4 unicast
+   network 1.254.1.4/30
+  !
+  neighbor 1.254.1.6
+   remote-as 1338
+   address-family ipv4 unicast
+    route-policy PASS in
+    route-policy CUST_B_RP_OUT out
+    as-override
+   !
+  !
+ !
+!
+mpls ldp
+ interface GigabitEthernet0/0/0/2
+ !
+ interface GigabitEthernet0/0/0/3
+ !
+!
+ssh server v2
+end
