@@ -1,184 +1,24 @@
 Current configuration : 2860 bytes
 !
 ! Last configuration change at 13:15:39 UTC Tue May 22 2018
-upgrade fpd auto
-version 15.2
-service timestamps debug datetime msec
-service timestamps log datetime msec
-no service password-encryption
 !
 hostname cust-a-02
-!
-boot-start-marker
-boot-end-marker
-!
-!
-!
-no aaa new-model
-no ip icmp rate-limit unreachable
-!
-!
-!
-!
-!
 !
 no ip domain lookup
 ip cef
 no ipv6 cef
 !
-multilink bundle-name authenticated
-!
-!
-!
-!
-!
-!
-!
-!
-!
-!
-redundancy
-!
-!
-ip tcp synwait-time 5
-csdb tcp synwait-time 30
-csdb tcp idle-time 3600
-csdb tcp finwait-time 5
-csdb tcp reassembly max-memory 1024
-csdb tcp reassembly max-queue-length 16
-csdb udp idle-time 30
-csdb icmp idle-time 10
-csdb session max-session 65535
-!
-!
-!
-!
-!
-!
-!
-!
-!
+ipv6 unicast-routing
 !
 interface Loopback0
  ip address 192.168.2.1 255.255.255.0
+ ipv6 address 2001:192:168:2::1/128
 !
 interface FastEthernet0/0
  ip address 1.254.0.2 255.255.255.252
+ ipv6 address 2001:1:254::2/127
+ ipv6 address fe80::A:2
  duplex half
-!
-interface Ethernet1/0
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet1/1
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet1/2
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet1/3
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet1/4
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet1/5
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet1/6
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet1/7
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/0
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/1
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/2
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/3
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/4
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/5
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/6
- no ip address
- shutdown
- duplex half
-!
-interface Ethernet2/7
- no ip address
- shutdown
- duplex half
-!
-interface FastEthernet3/0
- no ip address
- shutdown
- duplex auto
- speed auto
-!
-interface FastEthernet3/1
- no ip address
- shutdown
- duplex auto
- speed auto
-!
-interface FastEthernet4/0
- no ip address
- shutdown
- duplex auto
- speed auto
-!
-interface FastEthernet4/1
- no ip address
- shutdown
- duplex auto
- speed auto
-!
-interface GigabitEthernet5/0
- no ip address
- shutdown
- negotiation auto
-!
-interface GigabitEthernet6/0
- no ip address
- shutdown
- negotiation auto
 !
 router bgp 1337
  bgp log-neighbor-changes
@@ -188,28 +28,6 @@ router bgp 1337
   network 192.168.2.0
   neighbor 1.254.0.1 activate
  exit-address-family
-!
-ip forward-protocol nd
-no ip http server
-no ip http secure-server
-!
-!
-!
-no cdp log mismatch duplex
-!
-!
-!
-control-plane
-!
-!
-!
-mgcp profile default
-!
-!
-!
-gatekeeper
- shutdown
-!
 !
 line con 0
  exec-timeout 0 0
