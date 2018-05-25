@@ -36,10 +36,11 @@ for device in devices["devices"]:
             net_con = ConnectHandler(**current_device, global_delay_factor=4)
             running_config = net_con.send_command("show running-config")
             success = True
+
+            with open(f"C:\\Projects\\CCDP-ISP\\backups\\{hostname}_{time}", "w") as backup_file:
+                backup_file.write(running_config)
+            backup_file.close()
+
             print(f"success: {hostname}!")
         except:
             print(f"Error with {hostname}!")
-
-    with open(f"C:\\Projects\\CCDP-ISP\\backups\\{hostname}_{time}", "w") as backup_file:
-        backup_file.write(running_config)
-    backup_file.close()
